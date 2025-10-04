@@ -29,7 +29,7 @@ public class SoundButton extends Entity {
 
     /**
      *  Getter the state of the sound.
-     * @return isSoundOn
+     * @return Boolean of isSoundOn
      */
     public boolean getIsSoundOn() {
         return isSoundOn;
