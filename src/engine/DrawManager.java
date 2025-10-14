@@ -50,6 +50,8 @@ public final class DrawManager {
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
 
+	/**achieve list*/
+	private static Map<String, Boolean> killAchievements;
 	/** Sprite types. */
 	public static enum SpriteType {
 		/** Player ship. */
@@ -85,6 +87,12 @@ public final class DrawManager {
 		fileManager = Core.getFileManager();
 		logger = Core.getLogger();
 		logger.info("Started loading resources.");
+
+		killAchievements = new LinkedHashMap<>();
+		killAchievements.put("First Blood", false);
+		killAchievements.put("Penta Kill", false);
+		killAchievements.put("Skilled Killer", false);
+		killAchievements.put("Unstoppable Killer", false);
 
 		try {
 			spriteMap = new LinkedHashMap<SpriteType, boolean[][]>();
@@ -472,6 +480,24 @@ public final class DrawManager {
 	}
 
 	/**
+	 * Draws achievement screen title and instructions
+	 *
+	 * @param screen
+	 *            Screen to draw on.
+	 */
+	public void drawAchievementMenu(final Screen screen) {
+		String achievemnetString = "Achievement";
+		String instructionsString = "Press Space to return";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, achievemnetString, screen.getHeight() / 8);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString,
+				screen.getHeight() / 5);
+	}
+
+	/**
 	 * Draws high scores.
 	 * 
 	 * @param screen
@@ -566,4 +592,34 @@ public final class DrawManager {
 			drawCenteredBigString(screen, "GO!", screen.getHeight() / 2
 					+ fontBigMetrics.getHeight() / 3);
 	}
+	public void unlockKillAchievement(String name){
+		if (killAchievements.containsKey(name)){
+			killAchievements.put(name, true);
+		}
+	}
+	public boolean checkKillAchievement(String name){
+		return killAchievements.getOrDefault(name, false);
+	}
+
+	public void drawKillAchievementsList(final Screen screen) {
+		int yPosition = screen.getHeight() / 4 + 60;
+
+		for (Map.Entry<String, Boolean> entry : killAchievements.entrySet()) {
+			String name = entry.getKey();
+			boolean isUnlocked = entry.getValue();
+			String textToDraw;
+
+			if (isUnlocked) {
+				backBufferGraphics.setColor(Color.GREEN);
+				textToDraw = "[V] " + name;
+			} else {
+				backBufferGraphics.setColor(Color.RED);
+				textToDraw = "[ ] " + name;
+			}
+
+			drawCenteredRegularString(screen, textToDraw, yPosition);
+			yPosition += 40;
+		}
+	}
+
 }

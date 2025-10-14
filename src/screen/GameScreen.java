@@ -78,7 +78,7 @@ public class GameScreen extends Screen {
 	 *            Current game state.
 	 * @param gameSettings
 	 *            Current game settings.
-	 * @param bonnusLife
+	 * @param bonusLife
 	 *            Checks if a bonus life is awarded this level.
 	 * @param width
 	 *            Screen width.
@@ -208,6 +208,22 @@ public class GameScreen extends Screen {
 		if (this.levelFinished && this.screenFinishedCooldown.checkFinished())
 			this.isRunning = false;
 
+		if (!drawManager.checkKillAchievement("Unstoppable") && this.shipsDestroyed >= 30) {
+			drawManager.unlockKillAchievement("Unstoppable");
+		}
+		else if (!drawManager.checkKillAchievement("Stage Kill") && this.shipsDestroyed >= 15) {
+			drawManager.unlockKillAchievement("Stage Kill");
+		}
+		else if (!drawManager.checkKillAchievement("Pentakill") && this.shipsDestroyed >= 5) {
+			drawManager.unlockKillAchievement("Pentakill");
+		}
+		else if (!drawManager.checkKillAchievement("First Blood") && this.shipsDestroyed >= 1) {
+			drawManager.unlockKillAchievement("First Blood");
+		}
+		if (inputManager.isKeyDown(KeyEvent.VK_Q)) {
+			this.isRunning = false;
+			this.returnCode = 1; // 1번은 타이틀 화면으로 돌아가는 코드입니다.
+		}
 	}
 
 	/**
