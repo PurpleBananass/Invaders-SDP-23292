@@ -8,7 +8,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import screen.*;
 
 /**
  * Implements core game logic.
