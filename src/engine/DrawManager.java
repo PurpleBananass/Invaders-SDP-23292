@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import entity.FinalBoss;
 import entity.Ship;
-import screen.CreditScreen;
 import screen.Screen;
 import entity.Entity;
 
@@ -51,12 +50,6 @@ public final class DrawManager {
 
 	/** Sprite types mapped to their images. */
 	private static Map<SpriteType, boolean[][]> spriteMap;
-
-	/** (추가) 크레딧 등 작은 텍스트를 위한 폰트 */
-	private static Font fontSmall;
-	/** (추가) 작은 폰트 속성 */
-	private static FontMetrics fontSmallMetrics;
-
 
 	/** Sprite types. */
 	public static enum SpriteType {
@@ -146,7 +139,6 @@ public final class DrawManager {
 			// Font loading
 			fontRegular = fileManager.loadFont(14f);
 			fontBig = fileManager.loadFont(24f);
-			fontSmall = fileManager.loadFont(9f);
 			logger.info("Finished loading the fonts.");
 
 
@@ -199,7 +191,6 @@ public final class DrawManager {
 
 		fontRegularMetrics = backBufferGraphics.getFontMetrics(fontRegular);
 		fontBigMetrics = backBufferGraphics.getFontMetrics(fontBig);
-		fontSmallMetrics = backBufferGraphics.getFontMetrics(fontSmall);
 
 		// drawBorders(screen);
 		// drawGrid(screen);
@@ -658,7 +649,6 @@ public final class DrawManager {
 				screen.getHeight() / 5);
 	}
 
-
 	/**
 	 * Draws high scores.
 	 * 
@@ -701,46 +691,6 @@ public final class DrawManager {
 	        backBufferGraphics.setColor(Color.GRAY);
 	        drawCenteredRegularString(screen, "Press ESC to return", screen.getHeight() - 50);
 	    }
-	/**
-	 * Draws the credits screen title and instructions.
-	 *
-	 * @param screen Screen to draw on.
-	 */
-	public void drawCreditsMenu(final Screen screen) {
-		String creditsString = "Credits";
-		String instructionsString = "Press Space to return";
-
-		backBufferGraphics.setColor(Color.GREEN);
-		drawCenteredBigString(screen, creditsString, screen.getHeight() / 8);
-
-		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 5);
-	}
-
-	/**
-	 * Draws the list of credits on the screen.
-	 *
-	 * @param screen     Screen to draw on.
-	 * @param creditList List of credit information to display.
-	 */
-	public void drawCredits(final Screen screen, final List<CreditScreen.Credit> creditList) {
-		backBufferGraphics.setFont(fontSmall);
-		int yPosition = screen.getHeight() / 4;
-		final int xPosition = screen.getWidth() / 10;
-		final int lineSpacing = fontSmallMetrics.getHeight() + 1;
-		final int teamSpacing = lineSpacing + 5;
-
-		for (CreditScreen.Credit credit : creditList) {
-			backBufferGraphics.setColor(Color.GREEN);
-			String teamInfo = String.format("%s - %s", credit.getTeamName(), credit.getRole());
-			backBufferGraphics.drawString(teamInfo, xPosition, yPosition);
-			yPosition += lineSpacing;
-
-			yPosition += teamSpacing;
-		}
-	}
-
 	/**
 	 * Draws a centered string on regular font.
 	 * 

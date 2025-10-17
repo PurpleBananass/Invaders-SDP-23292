@@ -17,7 +17,6 @@ import screen.TitleScreen;
 import screen.AchievementScreen;
 import engine.level.LevelManager;
 import screen.ShopScreen;
-import screen.*;
 
 /**
  * Implements core game logic.
@@ -132,6 +131,8 @@ public final class Core {
                         frame.setScreen(currentScreen);
                         LOGGER.info("Closing game screen.");
 
+                        gameState = ((GameScreen) currentScreen).getGameState();
+
                         if (gameState.getLivesRemaining() > 0) {
                             LOGGER.info("Opening shop screen with "
                                     + gameState.getCoin() + " coins.");
@@ -188,11 +189,7 @@ public final class Core {
                     returnCode = frame.setScreen(currentScreen);
                     LOGGER.info("Closing achievement screen.");
                     break;
-				case 8: // (추가) CreditScreen
-					currentScreen = new CreditScreen(width, height, FPS);
-					LOGGER.info("Starting " + currentScreen.getClass().getSimpleName() + " screen.");
-					returnCode = frame.setScreen(currentScreen);
-					break;
+
                 default:
                     break;
             }
