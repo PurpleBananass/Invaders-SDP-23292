@@ -5,9 +5,13 @@ import engine.Core;
 import java.util.logging.Logger;
 
 public interface IView {
-	/** Load assets from outside ( fonts/images/sounds etc. ) */
-	void loadAssets(Object ... assets);
-	/** Draws the achievements on the screen */
+	/** Loads all resources needed by this view (fonts, images, sounds, etc.). */
+	void loadAssets();
+	/**
+	 * Draws the view's contents on the screen.
+	 *
+	 * @param dt The time delta since the last frame, used for animations.
+	 */
 	void draw(float dt);
 	/** Event when this view shows */
 	default void onShow() {}
