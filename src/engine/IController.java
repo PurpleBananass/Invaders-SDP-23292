@@ -2,9 +2,9 @@ package engine;
 
 public interface IController {
 
-	/** Command updating Model's state */
-	void updateModel(float deltaTime);
+	/** Update Model's state using inner logics */
+	void update(float deltaTime);
 	/** Render view */
-	void renderView();
+	void render();
 
 }
