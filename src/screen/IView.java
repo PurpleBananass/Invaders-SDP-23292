@@ -9,10 +9,8 @@ public interface IView {
 	void loadAssets();
 	/**
 	 * Draws the view's contents on the screen.
-	 *
-	 * @param dt The time delta since the last frame, used for animations.
 	 */
-	void draw(float dt);
+	void draw();
 	/** Event when this view shows */
 	default void onShow() {}
 	/** Event when this view hides */
