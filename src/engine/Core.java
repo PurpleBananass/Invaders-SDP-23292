@@ -106,6 +106,19 @@ public final class Core {
                     LOGGER.info("Closing title screen.");
                     break;
                 case 2:
+                    ModeSelectScreen modeScreen = new ModeSelectScreen(width, height, FPS);
+                    frame.setScreen(modeScreen);
+                    modeScreen.run();
+                    String selectedMode = modeScreen.getSelectedMode();
+                    LOGGER.info("Selected Mode: " + selectedMode);
+
+                    if ("CANCEL".equals(selectedMode)) {
+                        LOGGER.info("Mode selection canceled, returning to title screen.");
+                        currentScreen = new TitleScreen(width, height, FPS);
+                        returnCode = frame.setScreen(currentScreen);
+                        break;
+                    }
+
                     do {
                         // One extra life every few levels
                         boolean bonusLife = gameState.getLevel()
