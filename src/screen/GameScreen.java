@@ -155,7 +155,7 @@ public class GameScreen extends Screen {
 	 *            Maximum number of lives.
 	 * @param width
 	 *            Screen width.
-	 * @param height
+	 * @param height 
 	 *            Screen height.
 	 * @param fps
 	 *            Frames per second, frame rate at which the game is run.
