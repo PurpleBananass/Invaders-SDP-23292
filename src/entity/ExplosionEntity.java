@@ -2,7 +2,7 @@ package entity;
 
 import java.awt.Color;
 import java.util.Random;
-import engine.DrawManager;
+import engine.DrawManager; 
 
 public class ExplosionEntity extends Entity {
 
