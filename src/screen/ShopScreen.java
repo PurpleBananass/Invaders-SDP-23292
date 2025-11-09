@@ -349,14 +349,14 @@ public class ShopScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
 
-        drawManager.drawShopScreen(this, gameState.getCoin(), selectedItem,
+        drawManager.getShopRenderer().drawShopScreen(this, gameState.getCoin(), selectedItem,
                 selectionMode, selectedLevel, TOTAL_ITEMS,
                 ITEM_NAMES, ITEM_DESCRIPTIONS, ITEM_PRICES,
                 MAX_LEVELS, this);
 
         // Draw feedback message
         if (!purchaseFeedbackCooldown.checkFinished()) {
-            drawManager.drawShopFeedback(this, feedbackMessage);
+            drawManager.getShopRenderer().drawShopFeedback(this, feedbackMessage);
         }
 
         drawManager.completeDrawing(this);

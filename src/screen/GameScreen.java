@@ -397,12 +397,12 @@ public class GameScreen extends Screen {
 		drawManager.initDrawing(this);
 
 		if (this.livesP1 > 0) {
-			drawManager.drawEntity(this.ship, this.ship.getPositionX(),
+			drawManager.getEntityRenderer().drawEntity(this.ship, this.ship.getPositionX(),
 					this.ship.getPositionY());
 		}
 
 		if (this.shipP2 != null && this.livesP2 > 0) {
-			drawManager.drawEntity(this.shipP2, this.shipP2.getPositionX(), this.shipP2.getPositionY());
+			drawManager.getEntityRenderer().drawEntity(this.shipP2, this.shipP2.getPositionX(), this.shipP2.getPositionY());
 		}
 
 		// special enemy draw
@@ -412,9 +412,9 @@ public class GameScreen extends Screen {
 		/** draw final boss bullets */
 		if(this.finalBoss != null && !this.finalBoss.isDestroyed()){
 			for (BossBullet bossBullet : bossBullets) {
-				drawManager.drawEntity(bossBullet, bossBullet.getPositionX(), bossBullet.getPositionY());
+				drawManager.getEntityRenderer().drawEntity(bossBullet, bossBullet.getPositionX(), bossBullet.getPositionY());
 			}
-			drawManager.drawEntity(finalBoss, finalBoss.getPositionX(), finalBoss.getPositionY());
+			drawManager.getEntityRenderer().drawEntity(finalBoss, finalBoss.getPositionX(), finalBoss.getPositionY());
 		}
 
 		enemyShipFormation.draw();
@@ -424,33 +424,33 @@ public class GameScreen extends Screen {
 		}
 
 		for (Bullet bullet : this.bullets)
-			drawManager.drawEntity(bullet, bullet.getPositionX(),
+			drawManager.getEntityRenderer().drawEntity(bullet, bullet.getPositionX(),
 					bullet.getPositionY());
 
 		for (DropItem dropItem : this.dropItems)
-			drawManager.drawEntity(dropItem, dropItem.getPositionX(), dropItem.getPositionY());
+			drawManager.getEntityRenderer().drawEntity(dropItem, dropItem.getPositionX(), dropItem.getPositionY());
 
 		// Interface.
-        drawManager.drawScore(this, this.scoreP1);   // Top line still displays P1
-        drawManager.drawScoreP2(this, this.scoreP2); // Added second line for P2
-        drawManager.drawCoin(this,this.coin);
-		drawManager.drawLives(this, this.livesP1);
-		drawManager.drawLivesP2(this, this.livesP2);
-		drawManager.drawTime(this, this.elapsedTime);
-		drawManager.drawItemsHUD(this);
-		drawManager.drawLevel(this, this.currentLevel.getLevelName());
-		drawManager.drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
-		drawManager.drawHorizontalLine(this, ITEMS_SEPARATION_LINE_HEIGHT);
+        drawManager.getHUDRenderer().drawScoreP1(this, this.scoreP1);   // Top line still displays P1
+        drawManager.getHUDRenderer().drawScoreP2(this, this.scoreP2); // Added second line for P2
+        drawManager.getHUDRenderer().drawCoin(this,this.coin);
+		drawManager.getHUDRenderer().drawLivesP1(this, this.livesP1);
+		drawManager.getHUDRenderer().drawLivesP2(this, this.livesP2);
+		drawManager.getHUDRenderer().drawTime(this, this.elapsedTime);
+		drawManager.getHUDRenderer().drawItemsHUD(this);
+		drawManager.getHUDRenderer().drawLevel(this, this.currentLevel.getLevelName());
+		drawManager.getUIRenderer().drawHorizontalLine(this, SEPARATION_LINE_HEIGHT - 1);
+		drawManager.getUIRenderer().drawHorizontalLine(this, ITEMS_SEPARATION_LINE_HEIGHT);
 
 		if (this.achievementText != null && !this.achievementPopupCooldown.checkFinished()) {
-			drawManager.drawAchievementPopup(this, this.achievementText);
+			drawManager.getHUDRenderer().drawAchievementPopup(this, this.achievementText);
 		} else {
 			this.achievementText = null; // clear once expired
 		}
 
 		// Health notification popup
 		if(this.healthPopupText != null && !this.healthPopupCooldown.checkFinished()) {
-			drawManager.drawHealthPopup(this, this.healthPopupText);
+			drawManager.getHUDRenderer().drawHealthPopup(this, this.healthPopupText);
 		} else {
 			this.healthPopupText = null;
 		}
@@ -460,11 +460,11 @@ public class GameScreen extends Screen {
 			int countdown = (int) ((INPUT_DELAY
 					- (System.currentTimeMillis()
 					- this.gameStartTime)) / 1000);
-			drawManager.drawCountDown(this, this.level, countdown,
+			drawManager.getUIRenderer().drawCountDown(this, this.level, countdown,
 					this.bonusLife);
-			drawManager.drawHorizontalLine(this, this.height / 2 - this.height
+			drawManager.getUIRenderer().drawHorizontalLine(this, this.height / 2 - this.height
 					/ 12);
-			drawManager.drawHorizontalLine(this, this.height / 2 + this.height
+			drawManager.getUIRenderer().drawHorizontalLine(this, this.height / 2 + this.height
 					/ 12);
 		}
 

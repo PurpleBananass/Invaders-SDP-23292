@@ -299,19 +299,15 @@ public class TitleScreen extends Screen {
 	 */
 	private void nextMenuItem() {
 		SoundManager.play("sfx/menu_select.wav");
-		if (this.returnCode == 2)
-			this.returnCode = 3;
-		else if (this.returnCode == 3)
-			this.returnCode = 6;
-		else if (this.returnCode == 6)
-			this.returnCode = 4;
-		else if (this.returnCode == 4)
-			this.returnCode = 0;
-		else if (this.returnCode == 0)
-			this.returnCode = 2;
-		else if (this.returnCode == 5) {
-			this.returnCode = 0;
-		}
+        switch (this.returnCode) {
+            case 0 -> this.returnCode = 2; // Exit → Play
+            case 2 -> this.returnCode = 3; // Play → High Scores
+            case 3 -> this.returnCode = 4; // High Scores → Shop
+            case 4 -> this.returnCode = 6; // Shop → Achievements
+            case 6 -> this.returnCode = 0; // Achievements → Exit
+            case 5 -> this.returnCode = 0; // Sound button → Exit
+            default -> this.returnCode = 0;
+        }
 		this.targetAngle += 90;
 	}
 
@@ -320,19 +316,15 @@ public class TitleScreen extends Screen {
 	 */
 	private void previousMenuItem() {
 		SoundManager.play("sfx/menu_select.wav");
-		if (this.returnCode == 2)
-			this.returnCode = 0;
-		else if (this.returnCode == 0)
-			this.returnCode = 4;
-		else if (this.returnCode == 4)
-			this.returnCode = 6;
-		else if (this.returnCode == 6)
-			this.returnCode = 3;
-		else if (this.returnCode == 3)
-			this.returnCode = 2;
-		else if (this.returnCode == 5) {
-			this.returnCode = 6;
-		}
+        switch (this.returnCode) {
+            case 0 -> this.returnCode = 6; // Exit → Achievements
+            case 6 -> this.returnCode = 4; // Achievements → Shop
+            case 4 -> this.returnCode = 3; // Shop → High Scores
+            case 3 -> this.returnCode = 2; // High Scores → Play
+            case 2 -> this.returnCode = 0; // Play → Exit
+            case 5 -> this.returnCode = 6; // Sound button → Achievements
+            default -> this.returnCode = 0;
+        }
 		this.targetAngle -= 90;
 	}
 
@@ -365,12 +357,12 @@ public class TitleScreen extends Screen {
             int screenX = (int) (rotatedX + centerX);
             int screenY = (int) (rotatedY + centerY);
 
-			drawManager.drawEntity(enemy, screenX, screenY);
+			drawManager.getEntityRenderer().drawEntity(enemy, screenX, screenY);
 		}
 
-		drawManager.drawTitle(this);
-		drawManager.drawMenu(this, this.returnCode);
-		drawManager.drawEntity(this.soundButton, this.width * 4 / 5 - 16,
+		drawManager.getUIRenderer().drawTitle(this);
+		drawManager.getUIRenderer().drawMenu(this, this.returnCode);
+		drawManager.getEntityRenderer().drawEntity(this.soundButton, this.width * 4 / 5 - 16,
 				this.height * 4 / 5 - 16);
 
 		drawManager.completeDrawing(this);

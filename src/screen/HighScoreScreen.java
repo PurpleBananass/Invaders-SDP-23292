@@ -69,8 +69,8 @@ public class HighScoreScreen extends Screen {
 	private void draw() {
 		drawManager.initDrawing(this);
 
-		drawManager.drawHighScoreMenu(this);
-		drawManager.drawHighScores(this, this.highScores);
+		drawManager.getUIRenderer().drawHighScoreMenu(this);
+		drawManager.getUIRenderer().drawHighScores(this, this.highScores);
 
 		drawManager.completeDrawing(this);
 	}

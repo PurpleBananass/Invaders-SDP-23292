@@ -91,10 +91,16 @@ public class CreditScreen extends Screen {
     }
 
     private void draw() {
+
         drawManager.initDrawing(this);
 
-        drawManager.drawCreditsMenu(this);
-        drawManager.drawCredits(this, this.creditList);
+        drawManager.getUIRenderer().drawCreditsMenu(this);
+        drawManager.getUIRenderer().drawCredits(
+                this,
+                creditList.stream()
+                        .map(c -> c.getTeamName() + " - " + c.getRole())
+                        .toList()
+        );
 
         drawManager.completeDrawing(this);
     }
