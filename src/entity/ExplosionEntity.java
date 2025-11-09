@@ -6,7 +6,7 @@ import engine.DrawManager;
 
 public class ExplosionEntity extends Entity {
 
-    private static final long DURATION = 300; // 0.3 секунд
+    private static final long DURATION = 300; 
 
     private long startTime;
 
@@ -15,7 +15,7 @@ public class ExplosionEntity extends Entity {
     private static final Random random = new Random();
 
     public ExplosionEntity(final int x, final int y) {
-        super(x, y); 
+        super(x, y, 13 * 2, 7 * 2, Color.WHITE);
         
         this.spriteType = DrawManager.SpriteType.Explosion;
         
