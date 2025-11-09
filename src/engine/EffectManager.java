@@ -1,17 +1,16 @@
 package engine;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
-import entity.ExplosionEntity; // Шинэ класс-аа import хийнэ
+import entity.ExplosionEntity;
 
 public class EffectManager {
 
     private static EffectManager instance;
     
     private List<ExplosionEntity> explosions;
-  
+
     private EffectManager() {
         explosions = new ArrayList<>();
     }
