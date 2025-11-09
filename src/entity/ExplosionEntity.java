@@ -10,7 +10,7 @@ public class ExplosionEntity extends Entity {
 
     private long startTime;
 
-   private boolean isFinished = false;
+    private boolean isFinished = false;
 
     private static final Random random = new Random();
 
