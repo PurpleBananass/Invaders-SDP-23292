@@ -6,7 +6,7 @@ import engine.DrawManager;
 
 public class ExplosionEntity extends Entity {
 
-    private static final long DURATION = 300; 
+    private static final long DURATION = 300;
 
     private long startTime;
 
