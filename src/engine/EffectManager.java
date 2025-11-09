@@ -3,7 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
-import entity.ExplosionEntity;
+import entity.ExplosionEntity; // Шинэ класс-аа import хийнэ
 
 public class EffectManager {
 
